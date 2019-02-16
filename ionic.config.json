@@ -1,5 +1,7 @@
 {
   "name": "discoveryDevApp",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }

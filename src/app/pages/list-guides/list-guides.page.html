@@ -1,0 +1,26 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-title>Guides in {{locationName}}</ion-title>
+        <ion-buttons slot="start">
+            <ion-back-button></ion-back-button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content padding cache-view="false">
+    <div class="card" *ngFor="let audioguide of audioguides" (click)="viewGuide(audioguide)">
+        <h2>{{audioguide.title}}</h2>
+        <preload-image *ngIf="audioguide.imageUrl" [ratio]="{w: 2, h: 1}" [src]="audioguide.imageUrl"></preload-image>
+        <div class="card-footer">
+            <div>
+                <ion-icon name="locate"></ion-icon> {{audioguide.pois}} POIs
+            </div>
+            <div>
+                <ion-icon name="pricetag"></ion-icon> {{audioguide.price}} $
+            </div>
+            <div>
+                <ion-icon name="time"></ion-icon> {{audioguide.duration}} mins
+            </div>
+        </div>
+    </div>
+</ion-content>

@@ -1,0 +1,31 @@
+  <ion-header>
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-menu-button></ion-menu-button>
+        </ion-buttons>
+      <ion-searchbar placeholder="" type="text" spellcheck="true" (ionInput)="searchLocations($event)"></ion-searchbar>
+    </ion-toolbar>
+  </ion-header>
+  
+  <ion-content>
+    <h1>{{ 'home.welcome' | translate }}</h1>
+    <location-dropdown (idLocationEvent)="getLocations($event)"></location-dropdown>
+
+    <div *ngIf="locations?.length < 1">
+      <p>
+        {{'home.noresults' | translate}}
+      </p>
+    </div>
+  
+    <div *ngFor="let location of locations" class="location-card" (click)="openLocation(location)">
+      <preload-image [ratio]="{w: 2, h: 1}" [src]="location.imageUrl" class="location-card-image"></preload-image>
+      <h2>{{ location.title }}</h2>
+      <div class="location-card-content">     
+        <h1>
+          {{location.locationName}}, {{location.countryName}}
+        </h1>
+        <p>{{location.numberOfAudioguides}} audioguide<span *ngIf="location.numberOfAudioguides > 1">s</span></p>
+      </div>
+    </div>
+  </ion-content>
+  
