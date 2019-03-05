@@ -20,8 +20,6 @@ import { IonicStorageModule } from '@ionic/storage';
 import { FilesServiceProvider } from './services/files-service';
 import { Media, MediaObject } from '@ionic-native/media/ngx';
 
-import { PreloadImageComponentModule } from './components/preload-image/preload-image.module';
-
 export function HttpLoaderFactory(http: HttpClient) {
     return new TranslateHttpLoader(http, '../assets/i18n/', '.json');
   }

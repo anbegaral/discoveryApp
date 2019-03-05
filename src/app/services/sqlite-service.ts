@@ -39,14 +39,13 @@ export class SqliteServiceProvider implements OnInit {
                 name: 'discovery.db',
                 location: 'default'
             })
-                .then((db: SQLiteObject) => {
-                    this.database = db;
-                    this.createAudioguidesTable();
-                    this.createPoisTable();
-                    this.dbReady.next(true);
-                })
-                .catch(error => console.log(`creating database ` + JSON.stringify(error)));
-
+            .then((db: SQLiteObject) => {
+                this.database = db;
+                this.createAudioguidesTable();
+                this.createPoisTable();
+                this.dbReady.next(true);
+            })
+            .catch(error => console.log(`creating database ` + JSON.stringify(error)));
         });
     }
 
@@ -305,6 +304,7 @@ export class SqliteServiceProvider implements OnInit {
     }
 
     getDatabaseState() {
-        return this.dbReady.asObservable();
+        console.log(this.dbReady)
+        return this.dbReady;
     }
 }

@@ -3,12 +3,14 @@ import { SqliteServiceProvider } from './../../services/sqlite-service';
 
 import { User, Audioguide } from './../../services/models';
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
+import { ReactiveFormsModule, FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { NavController, NavParams, LoadingController } from '@ionic/angular';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { ActivatedRoute } from '@angular/router';
 import { PasswordValidator } from 'src/app/utils/PasswordValidator';
 import { TranslateService } from '@ngx-translate/core';
+import { Storage } from '@ionic/storage';
+
 
 @Component({
     selector: 'app-register-user',
@@ -26,7 +28,6 @@ export class RegisterUserPage implements OnInit {
     loader: any;
 
     constructor(public navCtrl: NavController,
-        public navParams: NavParams,
         public fireAuth: AngularFireAuth,
         private storage: Storage,
         public formBuilder: FormBuilder,
@@ -80,9 +81,9 @@ export class RegisterUserPage implements OnInit {
                     this.storage.set('isLoggedin', true);
                     this.storage.set('isAuthor', false);
                     this.addUser();
-                    this.loader.dismiss();
                     this.storage.get('useremail').then((email) => console.log(email)).catch(error => console.log(error));
                     this.sqliteService.getDatabaseState().subscribe(ready => {
+                        console.log(ready)
                         if (ready) {
                             this.buyAudioguide();
                         }
@@ -90,7 +91,7 @@ export class RegisterUserPage implements OnInit {
                 }
             ).catch(
                 (error) => {
-                    this.loader.dismiss();
+                    console.log(error);
                     // this.utils.handlerError(error);
                 }
             );

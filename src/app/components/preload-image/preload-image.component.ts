@@ -1,10 +1,10 @@
-import { Component, Input, ElementRef, Renderer2, ViewEncapsulation, ViewChild, OnChanges, PLATFORM_ID, Inject } from '@angular/core';
+import { Component, Input, ElementRef, Renderer2, ViewEncapsulation, OnChanges } from '@angular/core';
 
 @Component({
   selector: 'preload-image',
   templateUrl: './preload-image.component.html',
   styleUrls: ['./preload-image.component.scss'],
-  encapsulation: ViewEncapsulation.Emulated
+  encapsulation: ViewEncapsulation.None
 })
 export class PreloadImageComponent implements OnChanges {
   _src = '';
@@ -31,7 +31,7 @@ export class PreloadImageComponent implements OnChanges {
   }
 
   _update() {
-    this._loaded(false);
+    this._loaded(true);
   }
 
   _loaded(isLoaded: boolean) {

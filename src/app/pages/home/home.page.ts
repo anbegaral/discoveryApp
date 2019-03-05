@@ -1,9 +1,9 @@
+import { LocationsService } from './../../services/locations.service';
+import { AudioguideService } from './../../services/audioguide.service';
+import { Country, Location } from './../../services/models';
 import { element } from 'protractor';
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { Location, Country } from '../../services/models';
 import { NavController, LoadingController } from '@ionic/angular';
-import { AudioguideService } from '../../services/audioguide.service';
-import { LocationsService } from '../../services/locations.service';
 import { TranslateService } from '@ngx-translate/core';
 
 
@@ -11,7 +11,7 @@ import { TranslateService } from '@ngx-translate/core';
     selector: 'app-home',
     templateUrl: 'home.page.html',
     styleUrls: ['home.page.scss'],
-    encapsulation: ViewEncapsulation.Emulated
+    encapsulation: ViewEncapsulation.None
 })
 export class HomePage implements OnInit {
     locations: Location[] = [];

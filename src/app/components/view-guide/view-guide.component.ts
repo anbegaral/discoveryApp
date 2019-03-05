@@ -27,7 +27,11 @@ export class ViewGuideComponent implements OnInit {
         private route: ActivatedRoute,
         public alertCtrl: AlertController,
         private audioguideService: AudioguideService,
-        private playService: PlayGuideProvider) {}
+        private playService: PlayGuideProvider) {
+            if (!this.audioguide) {
+                this.audioguide = new Audioguide();
+            }
+        }
 
     ngOnInit() {
         this.getAudioguide();
@@ -68,9 +72,7 @@ export class ViewGuideComponent implements OnInit {
 
     getAudioguide() {
         const idAudioguide = this.route.snapshot.paramMap.get('id');
-        console.log(idAudioguide)
         this.audioguideService.getAudioguide(idAudioguide).subscribe(audioguide => {
-            console.log(audioguide)
             this.audioguide = audioguide[0];
             this.audioguideService.getPoiList(this.audioguide.key).subscribe(poi => this.audioguide.audioguidePois = poi);
         });
@@ -80,10 +82,8 @@ export class ViewGuideComponent implements OnInit {
         this.storage.get('isLoggedin').then(isLoggedin => {
             if (isLoggedin) {
                 // TODO sistema de compra
-                this.sqliteService.getDatabaseState().subscribe(ready => {
-                    if (ready) {
-                        this.buyAudioguide(this.audioguide);
-                    }
+                this.sqliteService.getDatabaseState().subscribe(() => {
+                    this.buyAudioguide(this.audioguide);
                 });
             } else {
                 this.storage.get('useremail').then(

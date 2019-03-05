@@ -1,8 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { TabsPage } from './tabs.page';
-import { ListGuidesPage } from '../pages/list-guides/list-guides.page';
-import { HomePage } from '../pages/home/home.page';
 
 const routes: Routes = [
     {
@@ -51,20 +49,20 @@ const routes: Routes = [
                 ]
             },
             {
-                path: 'tab2',
+                path: 'myGuides',
                 children: [
                     {
                         path: '',
-                        loadChildren: '../tab2/tab2.module#Tab2PageModule'
+                        loadChildren: '../pages/myGuides/myGuides.module#MyGuidesPageModule'
                     }
                 ]
             },
             {
-                path: 'tab3',
+                path: 'walk',
                 children: [
                     {
                         path: '',
-                        loadChildren: '../tab3/tab3.module#Tab3PageModule'
+                        loadChildren: '../pages/walk/walk.module#WalkPageModule'
                     }
                 ]
             }

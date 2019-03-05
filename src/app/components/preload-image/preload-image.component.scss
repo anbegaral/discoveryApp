@@ -24,7 +24,7 @@ preload-image {
     color: $spinner-color;
   }
 
-  ion-img {
+  img {
     position: absolute;
     top: 0;
     left: 0;
@@ -39,7 +39,7 @@ preload-image {
     background-color: transparent;
     border: 0;
 
-    ion-img {
+    img {
       opacity: 1;
       visibility: visible;
     }
