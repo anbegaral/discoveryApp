@@ -85,12 +85,10 @@ export class LoginComponent implements OnInit {
 
     buyAudioguide() {
         // TODO sistema de compra
-        this.sqliteService.getDatabaseState().subscribe(ready => {
-            if (ready) {
-                this.sqliteService.addAudioguide(this.audioguide).catch(error => {
-                    // this.utils.handlerError(error)
-                });
-            }
+        this.sqliteService.getDatabaseState().subscribe(() => {
+            this.sqliteService.addAudioguide(this.audioguide).catch(error => {
+                // this.utils.handlerError(error)
+            });
         });
     }
 }

@@ -1,4 +1,5 @@
-import { PreloadImageComponentModule } from '../../components/preload-image/preload-image.module';
+import { PreloadImageComponentModule } from './../../components/preload-image/preload-image.module';
+import { LocationsDropdownComponentModule } from './../../components/location-dropdown/locations-dropdown.module';
 import { TranslateModule } from '@ngx-translate/core';
 import { IonicModule } from '@ionic/angular';
 import { RouterModule, Routes } from '@angular/router';
@@ -6,7 +7,6 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { HomePage } from './home.page';
-import { LocationsDropdownComponentModule } from '../../components/location-dropdown/locations-dropdown.module';
 
 const routes: Routes = [
     { path: '', component: HomePage }
