@@ -83,7 +83,6 @@ export class RegisterUserPage implements OnInit {
                     this.addUser();
                     this.storage.get('useremail').then((email) => console.log(email)).catch(error => console.log(error));
                     this.sqliteService.getDatabaseState().subscribe(ready => {
-                        console.log(ready)
                         if (ready) {
                             this.buyAudioguide();
                         }

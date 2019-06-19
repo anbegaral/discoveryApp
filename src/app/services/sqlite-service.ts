@@ -18,7 +18,7 @@ export class SqliteServiceProvider implements OnInit {
     idAuthor: string;
 
     private database: SQLiteObject;
-    private dbReady: BehaviorSubject<boolean>;
+    private dbReady = new BehaviorSubject<boolean>(false);
     storageImageRef: any;
     storageAudioRef: any;
 
@@ -29,25 +29,22 @@ export class SqliteServiceProvider implements OnInit {
         private fileService: FilesServiceProvider,
         private firebaseStorage: FirebaseApp,
         private loadingCtrl: LoadingController) {
+            this.platform.ready().then(() => {
+                this.sqlite.create({
+                    name: 'discovery.db',
+                    location: 'default'
+                })
+                .then((db: SQLiteObject) => {
+                    this.database = db;
+                    this.createAudioguidesTable();
+                    this.createPoisTable();
+                    this.dbReady.next(true);
+                })
+                .catch(error => console.log(`creating database `, JSON.stringify(error)));
+            });
+        }
 
-    }
-
-    ngOnInit() {
-        this.dbReady = new BehaviorSubject(false);
-        this.platform.ready().then(() => {
-            this.sqlite.create({
-                name: 'discovery.db',
-                location: 'default'
-            })
-            .then((db: SQLiteObject) => {
-                this.database = db;
-                this.createAudioguidesTable();
-                this.createPoisTable();
-                this.dbReady.next(true);
-            })
-            .catch(error => console.log(`creating database ` + JSON.stringify(error)));
-        });
-    }
+    ngOnInit() {}
 
     async presentLoadingWithOptions(message) {
         const loading = await this.loadingCtrl.create({
@@ -173,8 +170,9 @@ export class SqliteServiceProvider implements OnInit {
     findAudioguides() {
         return this.database.executeSql(`SELECT * FROM audioguides`, []).then(
             (data) => {
+                console.log(data)
                 const audioguidesList = Array<Audioguide>();
-                if (data.rows.length > 0) {
+                if (data && data.rows.length > 0) {
                     for (let i = 0; i < data.rows.length; i++) {
                         audioguidesList.push(data.rows.item(i));
                     }

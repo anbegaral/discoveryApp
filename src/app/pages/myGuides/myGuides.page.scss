@@ -1,1 +1,45 @@
+page-myguides {
+
+    .location {
+        margin-left: -40px;
+        ul {
+            list-style: none;
+        }
+        li {
+            display: flex;
+            flex-wrap: wrap;
+            margin: 10px 0;
+            img {
+                width: 25%;
+                height: 25%;
+                margin: 0 5px 0 0;
+                align-self: flex-start;
+            }
+            ion-icon {
+                align-self: flex-start;
+                margin-left: 10px;
+            }
+
+            &:nth-child(even) {
+                background-color: lightgrey;
+            }
+            
+        }
+        
+        &-link {
+            font-size: 24px;
+            ::after {
+                content: "<ion-icon name='folder-open'></ion-icon>";
+            }
+        }
+    }
+    
+    .poi-list {
+        align-self: flex-end;
+        h3 {
+            font-size: 18px;
+            margin-bottom: 0;
+        }
+    }
+}
 
