@@ -32,22 +32,22 @@ export class FilesServiceProvider implements OnInit {
     }
 
     downloadFile(url, filename) {
-        console.log(url, filename)
+        console.log(url, filename);
         return this.file.resolveDirectoryUrl(this.storageDirectory)
             .then((resolvedDirectory) => {
-                console.log("resolved  directory: " + resolvedDirectory.nativeURL);
+                console.log('resolved  directory: ' + resolvedDirectory.nativeURL);
 
                 return this.file.checkFile(resolvedDirectory.nativeURL, filename)
                     .then((data) => {
-                        console.log('File already exist ' + data)
+                        console.log('File already exist ' + data);
                         return null;
                     })
                     .catch(err => {
-                        console.log("Error occurred while checking local files:");
+                        console.log('Error occurred while checking local files:');
                         console.log(err);
                         if (err.code === 1) {
                             const fileTransfer: FileTransferObject = this.transfer.create();
-                            console.log('url ' + url + ' this.storageDirectory ' + this.storageDirectory + filename)
+                            console.log('url ' + url + ' this.storageDirectory ' + this.storageDirectory + filename);
                             return fileTransfer.download(url, this.storageDirectory + filename)
                                 .then(entry => {
                                     console.log('download complete ' + entry.toURL());
@@ -72,7 +72,7 @@ export class FilesServiceProvider implements OnInit {
             },
             (error) => {
                 // upload failed
-                console.log(error)
+                console.log(error);
             },
             () => {
                 // upload success

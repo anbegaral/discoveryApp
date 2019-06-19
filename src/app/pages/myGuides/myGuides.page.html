@@ -1,9 +1,47 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>
-        MyGuides
-    </ion-title>
-  </ion-toolbar>
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-menu-button></ion-menu-button>
+        </ion-buttons>
+    </ion-toolbar>
 </ion-header>
+<ion-content padding>
+    <div *ngIf="!isAuthor">
+            <p>If you want to become a contributor and upload your own audioguide, please register your details</p>
+            <button ion-button primary (click)="registerContributor()">Register as contributor</button>
+            <button ion-button primary (click)="login()" *ngIf="!isLoggedin"> or Login</button>
+    </div>
+    <div *ngIf="isAuthor">
+        <button ion-button primary (click)="showNewAudioguide()">New guide</button>
+    </div>  
+    <ul class="location">
+        <li *ngFor="let location of locationList">
+            <div (click)="listAudioguidesByLocation(location)" class="location-link">{{location}}</div>
+            <ul>
+                <li *ngFor="let audioguide of audioguidesByLocation" class="openable{{location}}">
+                    <img src="{{storageDirectory + audioguide.image}}">
+                    <div (click)="toggleExpanded(audioguide.id)">
+                        <h3>{{audioguide.title}}</h3>
+                        <p>{{audioguide.purchased}}</p>
+                        <p>{{'home.pois' | translate}}{{audioguide.pois}}</p>
+                    </div>
+                    <ion-icon item-end name="trash" (click)="delete(audioguide.id)"></ion-icon>
+                    <ul class="openable{{audioguide.id}} poi-list hidden" >
+                        <li *ngFor="let poi of poiList">
+                            <img src="{{poi.imageUrl}}">
+                            <div>
+                                <h3>{{poi.title}}</h3>
+                                <p>{{'home.duration' | translate}}{{poi.duration}}</p>
+                                <p>{{'guides.size' | translate}}{{poi.size}}</p>
+                            </div>
+                            <ion-icon name="play" item-end *ngIf="!isPlaying" (click)="listen(poi.file)"></ion-icon>
+                            <ion-icon name="pause" item-end *ngIf="isPlaying" (click)="pause()"></ion-icon>
+                            <ion-icon name="square" item-end *ngIf="isPlaying" (click)="stop()"></ion-icon>
+                        </li>
+                    </ul>                                
+                </li>
+            </ul>
+        </li>
+    </ul>
+</ion-content>
 
-<ion-content></ion-content>
